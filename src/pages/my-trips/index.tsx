@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../services/Firebase';
@@ -58,6 +58,22 @@ function History() {
       >
         <CircularProgress />
       </Box>
+    );
+  }
+
+  if (trips.length === 0) {
+    return (
+      <div className="px-5 mt-10 mb-10 sm:px-10 md:px-32 lg:px-56 xl:px-72 text-center">
+        <h2 className="font-bold text-3xl mb-5">No Trips Found</h2>
+        <p className="text-lg mb-5">Create trips to get them here.</p>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={() => navigate('/create')}
+        >
+          Create Trip
+        </Button>
+      </div>
     );
   }
 
